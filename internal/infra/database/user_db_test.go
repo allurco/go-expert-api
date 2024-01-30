@@ -5,17 +5,15 @@ import (
 
 	"github.com/allurco/go-expert-api/internal/entity"
 	"github.com/stretchr/testify/assert"
-	"gorm.io/driver/sqlite"
-	"gorm.io/gorm"
 )
 
 func TestCreateUser(t *testing.T) {
-	db, err := gorm.Open(sqlite.Open("file::memory:"), &gorm.Config{})
+
+	db, err := CreateConnection(&entity.User{})
 	if err != nil {
 		t.Error(err)
 	}
 
-	db.AutoMigrate(&entity.User{})
 	user, _ := entity.NewUser("jon", "j@j.com", "123456")
 	userDB := NewUser(db)
 
@@ -33,12 +31,10 @@ func TestCreateUser(t *testing.T) {
 }
 
 func TestGetUserByEmail(t *testing.T) {
-	db, err := gorm.Open(sqlite.Open("file::memory:"), &gorm.Config{})
+	db, err := CreateConnection(&entity.User{})
 	if err != nil {
 		t.Error(err)
 	}
-
-	db.AutoMigrate(&entity.User{})
 	user, _ := entity.NewUser("jon", "bolas@gmail.com", "123456")
 	userDB := NewUser(db)
 

@@ -10,7 +10,7 @@ type UserInterface interface {
 type ProductInterface interface {
 	CreateProduct(product *entity.Product) error
 	GetProductById(id string) (*entity.Product, error)
-	GetProducts(page, limit int, sort string) ([]*entity.Product, error)
+	GetProducts(page, limit int, sort string) ([]entity.Product, error)
 	UpdateProduct(product *entity.Product) error
 	DeleteProduct(id string) error
 }

@@ -1,6 +1,8 @@
 package database
 
 import (
+	"log"
+
 	"github.com/allurco/go-expert-api/internal/entity"
 	"gorm.io/gorm"
 )
@@ -49,12 +51,16 @@ func (p *Product) GetProducts(page, limit int, sort string) ([]entity.Product, e
 	var err error
 	if sort == "" && sort != "asc" && sort != "desc" {
 		sort = "id asc"
+	} else {
+		sort = "created_at " + sort
 	}
 
+	log.Print(page)
+
 	if page != 0 && limit != 0 {
-		err = p.DB.Limit(limit).Offset((page - 1) * limit).Order("create_at " + sort).Find(&products).Error
+		err = p.DB.Limit(limit).Offset((page - 1) * limit).Order(sort).Find(&products).Error
 	} else {
-		err = p.DB.Order("created_at " + sort).Find(&products).Error
+		err = p.DB.Order(sort).Find(&products).Error
 	}
 
 	return products, err

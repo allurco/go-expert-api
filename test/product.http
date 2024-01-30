@@ -1,0 +1,29 @@
+POST http://localhost:8000/products
+Content-Type: application/json
+
+{
+    "name": "Producxt 1",
+    "price": 10.20
+
+}
+
+###
+
+GET http://localhost:8000/product/ff7f9c5d-4e31-4758-8fb9-1746205f5a76
+Content-Type: application/json
+
+###
+
+PUT http://localhost:8000/product/ff7f9c5d-4e31-4758-8fb9-1746205f5a76/update
+Content-Type: application/json
+
+{
+    "name": "Producxt ABDssC",
+    "price": 12.20
+
+}
+
+###
+
+GET http://localhost:8000/find/products?limit=2&page=1&sort=desc
+Content-Type: application/json
